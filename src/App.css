@@ -1,0 +1,21 @@
+/* Hide the buttons and other unnecessary elements */
+#html5-qrcode-button-camera-permission,
+#html5-qrcode-button-camera-start,
+#html5-qrcode-button-camera-stop,
+#html5-qrcode-button-file-selection,
+#html5-qrcode-anchor-scan-type-change,
+#html5-qrcode-select-camera {
+    display: none !important;
+}
+
+/* Ensure the camera feed fills the container */
+#barcode-scanner video {
+    width: 100% !important;
+    height: fit-content !important;
+    object-fit: fill;
+    /* Ensure the video fills the container */
+}
+
+#barcode-scanner__dashboard {
+    height: 0 !important;
+}
