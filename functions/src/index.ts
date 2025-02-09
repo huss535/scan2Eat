@@ -2,9 +2,11 @@
 
 import { onRequest } from "firebase-functions/v2/https";
 import * as logger from "firebase-functions/logger";
-import { Ingredient } from "./model";
+import { Ingredient, Recipe } from "./model";
+import * as dotevn from "dotenv";
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
+dotevn.config();
 
 export const helloWorld = onRequest((request, response) => {
     logger.info("Hello logs!", { structuredData: true });
@@ -24,3 +26,30 @@ export const getIngredient = onRequest(async (request, response) => {
     }
     response.send(ingredient);
 });
+
+// Endpoint to get recipes based on retrieved ingredient
+export const getRecipes = onRequest(async (request, response) => {
+
+    const spoonacularApiKey = process.env.SPOONACULAR_API_KEY || "";
+    const ingredient = request.query.ingredient as string;
+
+
+    const fetchResponse = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}&number=5&ranking=1&apiKey=${spoonacularApiKey}`);
+    const data = await fetchResponse.json();
+    const recipes: Recipe[] = data.map((recipe: any) => {
+
+        return {
+            id: recipe.id,
+            name: recipe.title,
+            image: recipe.image,
+            ingredients: [
+                ...(recipe.usedIngredients.map((ingredient: any) => ingredient.name) || []),
+                ...(recipe.missedIngredients.map((ingredient: any) => ingredient.name) || [])
+            ]
+        }
+    })
+    response.send(recipes);
+
+});
+
+
