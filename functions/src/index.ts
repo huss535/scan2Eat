@@ -30,7 +30,7 @@ export const getIngredient = onRequest(async (request, response) => {
 // Endpoint to get recipes based on retrieved ingredient
 export const getRecipes = onRequest(async (request, response) => {
 
-    const spoonacularApiKey = process.env.SPOONACULAR_API_KEY || "";
+    const spoonacularApiKey: string = process.env.SPOONACULAR_API_KEY || "";
     const ingredient = request.query.ingredient as string;
 
 
@@ -41,14 +41,32 @@ export const getRecipes = onRequest(async (request, response) => {
         return {
             id: recipe.id,
             name: recipe.title,
-            image: recipe.image,
-            ingredients: [
-                ...(recipe.usedIngredients.map((ingredient: any) => ingredient.name) || []),
-                ...(recipe.missedIngredients.map((ingredient: any) => ingredient.name) || [])
-            ]
+
         }
     })
     response.send(recipes);
+
+});
+
+
+// Endpoint to get recipe information based on recipe id
+export const getRecipe = onRequest(async (request, response) => {
+
+    const recipeId: string = request.query.recipeId as string;
+    const spoonacularApiKey = process.env.SPOONACULAR_API_KEY || "";
+    const fetchResponse = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${spoonacularApiKey}`);
+    const data = await fetchResponse.json();
+    const recipe: Recipe = {
+        id: data.id,
+        name: data.title,
+        summary: data.summary,
+        image: data.image,
+        diet: data.diets,
+        ingredients: data.extendedIngredients.map((ingredient: any) => ingredient.originalName),
+
+    }
+    response.send(recipe);
+    //673463
 
 });
 

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getRecipes = exports.getIngredient = exports.helloWorld = void 0;
+exports.getRecipe = exports.getRecipes = exports.getIngredient = exports.helloWorld = void 0;
 const https_1 = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
 const dotevn = require("dotenv");
@@ -34,13 +34,25 @@ exports.getRecipes = (0, https_1.onRequest)(async (request, response) => {
         return {
             id: recipe.id,
             name: recipe.title,
-            image: recipe.image,
-            ingredients: [
-                ...(recipe.usedIngredients.map((ingredient) => ingredient.name) || []),
-                ...(recipe.missedIngredients.map((ingredient) => ingredient.name) || [])
-            ]
         };
     });
     response.send(recipes);
+});
+// Endpoint to get recipe information based on recipe id
+exports.getRecipe = (0, https_1.onRequest)(async (request, response) => {
+    const recipeId = request.query.recipeId;
+    const spoonacularApiKey = process.env.SPOONACULAR_API_KEY || "";
+    const fetchResponse = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${spoonacularApiKey}`);
+    const data = await fetchResponse.json();
+    const recipe = {
+        id: data.id,
+        name: data.title,
+        summary: data.summary,
+        image: data.image,
+        diet: data.diets,
+        ingredients: data.extendedIngredients.map((ingredient) => ingredient.originalName),
+    };
+    response.send(recipe);
+    //673463
 });
 //# sourceMappingURL=index.js.map
