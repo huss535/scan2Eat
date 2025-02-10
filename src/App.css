@@ -1,17 +1,19 @@
 /* Hide the buttons and other unnecessary elements */
-#html5-qrcode-button-camera-permission,
+/* #html5-qrcode-button-camera-permission, */
 #html5-qrcode-button-camera-start,
 #html5-qrcode-button-camera-stop,
 #html5-qrcode-button-file-selection,
-#html5-qrcode-anchor-scan-type-change,
-#html5-qrcode-select-camera {
+#html5-qrcode-anchor-scan-type-change
+
+/* #html5-qrcode-select-camera */
+    {
     display: none !important;
 }
 
 /* Ensure the camera feed fills the container */
 #barcode-scanner video {
     width: 100% !important;
-    height: fit-content !important;
+    height: 100% !important;
     object-fit: fill;
     /* Ensure the video fills the container */
 }
@@ -26,6 +28,16 @@
     justify-content: space-between;
     align-items: center;
     height: 100vh;
+}
+
+#barcode-scanner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+
 }
 
 h1 {

@@ -14,8 +14,8 @@ const BarcodeScanner = ({ onScanSuccess, onScanError }: BarcodeScannerProps) => 
             'barcode-scanner', // ID of the HTML element to render the scanner
             {
                 qrbox: {
-                    width: 250,
-                    height: 250,
+                    width: 700,
+                    height: 700,
                 },
                 fps: 5,
                 disableFlip: true, // Disable flipping the camera feed
@@ -27,7 +27,7 @@ const BarcodeScanner = ({ onScanSuccess, onScanError }: BarcodeScannerProps) => 
         qrCodeScanner.render(onScanSuccess, onScanError);
 
         return () => {
-            qrCodeScanner.clear();
+            /*  qrCodeScanner.clear(); */
         };
     });
 
