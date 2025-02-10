@@ -1,10 +1,10 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #0000;
+  color: black;
   background-color: #F9f9f9;
 
   font-synthesis: none;
@@ -12,4 +12,16 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --color-primary: #bef8e5;
+  --color-secondary: #5daf82;
+  --border-radius: 0.25rem;
+  --h1-font-size: 3rem;
+  --h2-font-size: 2rem;
+  --text-font-size: 1.5rem;
+
+}
+
+body {
+  margin: 0;
 }

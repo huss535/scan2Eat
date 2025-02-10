@@ -16,10 +16,20 @@ const ScannerPage = () => {
     };
 
     return (
-        <div>
-            <h1>Barcode Scanner</h1>
+        <div id="scanner-page">
+
             <BarcodeScanner onScanSuccess={handleScanSuccess} onScanError={handleScanError} />
-            {scannedCode && <p>Scanned Code: {scannedCode}</p>}
+            <section>
+                <h1 >
+                    SCAN
+                </h1>
+                <h1>
+                    UNDERSTAND
+                </h1>
+                <h1>
+                    EAT WELL
+                </h1>
+            </section>
         </div>
     );
 }
