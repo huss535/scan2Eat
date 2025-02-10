@@ -13,9 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --color-primary: #bef8e5;
+  --color-primary: #e2fff5;
   --color-secondary: #5daf82;
-  --border-radius: 0.25rem;
+  --color-border: #bef8e5;
+  --border-radius: 0.5rem;
+  --border-width: 0.35rem;
   --h1-font-size: 3rem;
   --h2-font-size: 2rem;
   --text-font-size: 1.5rem;
