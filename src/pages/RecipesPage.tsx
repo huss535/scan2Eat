@@ -2,10 +2,19 @@ import RecipeContainer from "../components/RecipeContainer";
 
 const RecipesPage = () => {
 
+    const recipes = ["Spagetti meatball Pasta", "Steak and Chips", "Fish and chips", "Chicken Ceaser Salad", "Creamy Buttery Pecan"];
+
     return (
-        <div>
-            <h1>Recipes</h1>
-            <RecipeContainer />
+        <div id="recipes-page">
+            <section>
+                <h1>Recipes</h1>
+            </section>
+            <div className="recipes-container">
+                {recipes.map((recipe, index) => (
+                    <RecipeContainer key={index} recipe={recipe} />
+                ))}
+            </div>
+
         </div>
 
     );
