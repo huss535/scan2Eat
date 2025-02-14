@@ -6,7 +6,7 @@ const RecipesPage = () => {
 
     return (
         <div id="recipes-page">
-            <section>
+            <section className='header-background header-background-seperator'>
                 <h1>Recipes</h1>
             </section>
             <div className="recipes-container">
