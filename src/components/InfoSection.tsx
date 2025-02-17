@@ -7,7 +7,7 @@ interface InfoSectionProps {
 const InfoSection = ({ title, content }: InfoSectionProps) => {
 
     return (
-        <div>
+        <div className="info-section">
             <h2>{title}</h2>
             <hr />
             <p>{content}</p>
