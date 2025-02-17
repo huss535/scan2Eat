@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ScannerPage from './pages/ScannerPage'
 import RecipesPage from './pages/RecipesPage'
 import IngredientPage from './pages/IngredientPage'
+import RecipeInformation from './pages/RecipeInformation'
 function App() {
 
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<ScannerPage />} />
           <Route path='/recipes' element={<RecipesPage />} />
           <Route path='/ingredient/:ingredientId' element={<IngredientPage />} />
+          <Route path='/recipeDetails' element={<RecipeInformation />} />
           <Route path='*' element={<h1>Not Found</h1>} />
         </Routes>
 
