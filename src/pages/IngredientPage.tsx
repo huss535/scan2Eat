@@ -19,6 +19,8 @@ const IngredientPage = () => {
                 <p>This product is high in sugar, fat, and saturated fat but low in salt</p>
             </section>
 
+            <button>View Recipes</button>
+
         </main>
     );
 }
