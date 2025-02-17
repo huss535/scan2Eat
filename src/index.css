@@ -24,6 +24,20 @@
 
 }
 
+
 body {
   margin: 0;
+}
+
+body,
+button {
+
+  font-family: "Roboto Condensed", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+p {
+  line-height: 3rem;
 }
