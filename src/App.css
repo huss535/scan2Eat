@@ -64,6 +64,12 @@
 
 }
 
+
+h2,
+p {
+    margin: 0;
+}
+
 h1 {
     font-size: var(--h1-font-size);
     color: var(--color-secondary);
@@ -71,6 +77,14 @@ h1 {
     text-align: center;
     transform: rotate(-10deg);
 
+}
+
+h2 {
+    font-size: var(--h2-font-size);
+}
+
+p {
+    font-size: var(--text-font-size);
 }
 
 #scanner-page section {
@@ -146,4 +160,42 @@ h1 {
 
     gap: 1rem;
     padding: 0.5rem 0.25rem;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    gap: 3rem;
+}
+
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 3rem;
+    width: 90%;
+    margin: auto;
+    height: 100%;
+
+}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.info-section h2 {
+    border-bottom: solid 0.15rem black;
+
+}
+
+.info-section p {
+    align-self: flex-end;
 }

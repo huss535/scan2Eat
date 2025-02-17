@@ -5,19 +5,21 @@ const IngredientPage = () => {
 
     return (
 
-        <div  >
+        <main  >
             <section className='header-background header-background-seperator'>
                 <h1>paprika</h1>
             </section>
 
-            <InfoSection title="Nutritional Value" content="HIGH" />
+            <section className='page-content'>
 
-            <InfoSection title="Allergens" content="NUTS, SOYBEANS" />
+                <InfoSection title="Nutritional Value" content="HIGH" />
 
-            <p>This product is high in sugar, fat, and saturated fat but low in salt</p>
+                <InfoSection title="Allergens" content="NUTS, SOYBEANS" />
 
+                <p>This product is high in sugar, fat, and saturated fat but low in salt</p>
+            </section>
 
-        </div>
+        </main>
     );
 }
 

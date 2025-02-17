@@ -18,8 +18,8 @@
   --color-border: #bef8e5;
   --border-radius: 0.5rem;
   --border-width: 0.35rem;
-  --h1-font-size: 3rem;
-  --h2-font-size: 2rem;
+  --h1-font-size: 4rem;
+  --h2-font-size: 2.5rem;
   --text-font-size: 1.5rem;
 
 }
@@ -27,4 +27,3 @@
 body {
   margin: 0;
 }
-
