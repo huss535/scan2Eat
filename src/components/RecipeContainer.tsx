@@ -18,9 +18,10 @@ const RecipeContainer = (recipe: string) => {
 export default RecipeContainer; */
 
 import React from 'react';
+import { Recipe } from '../../functions/src/model';
 
 interface RecipeContainerProps {
-    recipe: string;
+    recipe: Recipe;
 }
 
 const RecipeContainer: React.FC<RecipeContainerProps> = ({ recipe }) => {
@@ -30,14 +31,10 @@ const RecipeContainer: React.FC<RecipeContainerProps> = ({ recipe }) => {
     }
 
     return (
-        <div className="recipe-container">
-            <h2>{recipe}</h2>
+        <div className="recipe-container" onClick={recipeDetailHandler}>
+            <p>{recipe.name}</p>
 
-            <div className="recipe-action-icon" onClick={recipeDetailHandler}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" width={50} height={45} strokeWidth={2}>
-                    <path d="M9 6l6 6l-6 6" />
-                </svg>
-            </div>
+
         </div>
     );
 };

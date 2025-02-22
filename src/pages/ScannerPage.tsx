@@ -18,8 +18,8 @@ const ScannerPage = () => {
     return (
         <div id="scanner-page">
 
-            {/*             <BarcodeScanner onScanSuccess={handleScanSuccess} onScanError={handleScanError} />
- */}            <section>
+            <BarcodeScanner onScanSuccess={handleScanSuccess} onScanError={handleScanError} />
+            <section>
                 <h1 >
                     SCAN
                 </h1>

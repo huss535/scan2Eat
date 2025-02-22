@@ -28,7 +28,7 @@ exports.getIngredient = (0, https_1.onRequest)(async (request, response) => {
 exports.getRecipes = (0, https_1.onRequest)(async (request, response) => {
     const spoonacularApiKey = process.env.SPOONACULAR_API_KEY || "";
     const ingredient = request.query.ingredient;
-    const fetchResponse = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}&number=5&ranking=1&apiKey=${spoonacularApiKey}`);
+    const fetchResponse = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}&number=7&ranking=1&apiKey=${spoonacularApiKey}`);
     const data = await fetchResponse.json();
     const recipes = data.map((recipe) => {
         return {
