@@ -34,7 +34,7 @@ export const getRecipes = onRequest(async (request, response) => {
     const ingredient = request.query.ingredient as string;
 
 
-    const fetchResponse = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}&number=5&ranking=1&apiKey=${spoonacularApiKey}`);
+    const fetchResponse = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}&number=7&ranking=1&apiKey=${spoonacularApiKey}`);
     const data = await fetchResponse.json();
     const recipes: Recipe[] = data.map((recipe: any) => {
 
