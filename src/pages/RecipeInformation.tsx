@@ -31,8 +31,8 @@ const RecipeInformation = () => {
 
 
 
-                        <InfoSection title="DIET" content="VEGAN, VEGETARIAN" />
-                        <InfoSection title="INGREDIENTS" content="Peanut butter, Butter, Milk, Sugar, Oil, Cornstarch, Garlic, Salt" />
+                        <InfoSection title="DIET" content={recipe.diet?.toString() || "Could not load data"} />
+                        <InfoSection title="INGREDIENTS" content={recipe.ingredients?.toString() || "Could not load data"} />
                     </section>
                 </>
             ) : (
