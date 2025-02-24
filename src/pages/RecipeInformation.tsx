@@ -1,30 +1,43 @@
+import { useEffect, useState } from "react";
 import InfoSection from "../components/InfoSection";
-
-
+import { Recipe } from "../../functions/src/model";
+import { useParams } from "react-router-dom";
+import DOMPurify from 'dompurify';
 
 
 const RecipeInformation = () => {
+    const { recipeId } = useParams();
+    const [recipe, setRecipe] = useState<Recipe | null>(null);
+    useEffect(() => {
 
+        fetch(`http://127.0.0.1:5001/scan2eat-8058d/us-central1/getRecipe?recipeId=${recipeId}`).then(
+            response => response.json()).then(
+                data => { setRecipe(data); console.dir(data) }
+            );
+
+    }, [recipeId]);
     return (
+
         <main>
+            {recipe ? ( // Conditionally render based on whether recipe exists
+                <>
+                    <section className='header-background header-background-seperator'>
+                        <h1>{recipe.name}</h1>
+                    </section>
 
-            <section className='header-background header-background-seperator'>
-                <h1>
-                    Peach Pie
-                </h1>
-            </section>
+                    <section className='page-content'>
+                        <img src={recipe.image} alt={recipe.name} />
+                        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(recipe.summary || '') }}></p>
 
-            <section className='page-content'>
 
-                <img src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTAyL3Jhd3BpeGVsX29mZmljZV8zMF9hX2RyYXdpbmdfb2ZfYV9idXJnZXJfaW5fdGhlX3N0eWxlX29mX2JvbGRfb181NWI2OWI5ZC02YjQ2LTRkZDctYWFlMy0wMDkzOTUwODc5ZDdfMS5wbmc.png" />
 
-                <p>
-
-                    Rich in protein and omega-3s, this flavorful dish supports heart and brain health. Packed with vitamins B12 and D, it’s a nutrient-dense meal with around 200-250 calories per serving.
-                </p>
-
-                <InfoSection title="INGREDIENTS" content="Peanut butter, Butter, Milk, Sugar, Oil, Cornstarch, Garlic, Salt" />
-            </section>
+                        <InfoSection title="DIET" content="VEGAN, VEGETARIAN" />
+                        <InfoSection title="INGREDIENTS" content="Peanut butter, Butter, Milk, Sugar, Oil, Cornstarch, Garlic, Salt" />
+                    </section>
+                </>
+            ) : (
+                <p>Loading...</p> // Show loading message if recipe is not yet available
+            )}
         </main>
     )
 }

@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={<ScannerPage />} />
           <Route path='/recipes' element={<RecipesPage />} />
           <Route path='/ingredient/:ingredientId' element={<IngredientPage />} />
-          <Route path='/recipeDetails' element={<RecipeInformation />} />
+          <Route path='/recipeDetails/:recipeId' element={<RecipeInformation />} />
           <Route path='*' element={<h1>Not Found</h1>} />
         </Routes>
 
