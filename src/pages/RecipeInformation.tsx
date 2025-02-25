@@ -6,6 +6,14 @@ import DOMPurify from 'dompurify';
 
 
 const RecipeInformation = () => {
+    const recipeTestDummy: Recipe = {
+        id: 1,
+        name: "Spaghetti Meatball Pasta",
+        image: "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
+        summary: "Spaghetti with meatballs is an Italian-American dish that usually consists of spaghetti, tomato sauce and meatballs Italian-American cuisine is a style of Italian cuisine adapted throughout the United States of America. Italian-American food is based on the food of Southern Italy, heavily influenced by Italian",
+        diet: ["Vegetarian", "Vegan"],
+        ingredients: ["Spaghetti", "Tomato Sauce", "Meatballs"]
+    }
     const { recipeId } = useParams();
     const [recipe, setRecipe] = useState<Recipe | null>(null);
     useEffect(() => {
@@ -18,27 +26,34 @@ const RecipeInformation = () => {
     }, [recipeId]);
     return (
 
-        <main>
+        <>
             {recipe ? ( // Conditionally render based on whether recipe exists
-                <>
-                    <section className='header-background header-background-seperator'>
+                <main>
+                    {/*  <section className='header-background header-background-seperator'>
                         <h1>{recipe.name}</h1>
-                    </section>
-
+                    </section> */}
+                    <img src={recipe.image} alt={recipe.name} />
                     <section className='page-content'>
-                        <img src={recipe.image} alt={recipe.name} />
-                        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(recipe.summary || '') }}></p>
+
+
+                        <p
+                            dangerouslySetInnerHTML={{
+                                __html: DOMPurify.sanitize(
+                                    `<span>${recipe.name}</span> ${recipe.summary || ''}`
+                                )
+                            }}
+                        ></p>
 
 
 
                         <InfoSection title="DIET" content={recipe.diet?.toString() || "Could not load data"} />
                         <InfoSection title="INGREDIENTS" content={recipe.ingredients?.toString() || "Could not load data"} />
                     </section>
-                </>
+                </main>
             ) : (
                 <p>Loading...</p> // Show loading message if recipe is not yet available
             )}
-        </main>
+        </>
     )
 }
 

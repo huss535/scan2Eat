@@ -88,6 +88,13 @@ p {
     font-size: var(--text-font-size);
 }
 
+span {
+    color: var(--color-secondary);
+    font-style: italic;
+    font-weight: bold;
+
+}
+
 #scanner-page section {
     position: relative;
     background-color: var(--color-border);
@@ -174,8 +181,10 @@ main {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     gap: 3rem;
+    margin-bottom: 3rem;
+
 }
 
 
@@ -221,6 +230,6 @@ button {
 
 img {
 
-    width: 35%;
+    width: 100%;
     height: auto;
 }
