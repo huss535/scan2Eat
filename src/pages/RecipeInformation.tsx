@@ -15,32 +15,39 @@ const RecipeInformation = () => {
         ingredients: ["Spaghetti", "Tomato Sauce", "Meatballs"]
     }
     const { recipeId } = useParams();
-    /*  const [recipe, setRecipe] = useState<Recipe | null>(null);
-     useEffect(() => {
- 
-         fetch(`http://127.0.0.1:5001/scan2eat-8058d/us-central1/getRecipe?recipeId=${recipeId}`).then(
-             response => response.json()).then(
-                 data => { setRecipe(data); console.dir(data) }
-             );
- 
-     }, [recipeId]); */
+    const [recipe, setRecipe] = useState<Recipe | null>(null);
+    useEffect(() => {
+
+        fetch(`http://127.0.0.1:5001/scan2eat-8058d/us-central1/getRecipe?recipeId=${recipeId}`).then(
+            response => response.json()).then(
+                data => { setRecipe(data); console.dir(data) }
+            );
+
+    }, [recipeId]);
     return (
 
         <>
-            {recipeTestDummy ? ( // Conditionally render based on whether recipe exists
+            {recipe ? ( // Conditionally render based on whether recipe exists
                 <main>
                     {/*  <section className='header-background header-background-seperator'>
-                        <h1>{recipeTestDummy.name}</h1>
+                        <h1>{recipe.name}</h1>
                     </section> */}
-                    <img src={recipeTestDummy.image} alt={recipeTestDummy.name} />
+                    <img src={recipe.image} alt={recipe.name} />
                     <section className='page-content'>
 
-                        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(recipeTestDummy.summary || '') }}></p>
+
+                        <p
+                            dangerouslySetInnerHTML={{
+                                __html: DOMPurify.sanitize(
+                                    `<span>${recipe.name}</span> ${recipe.summary || ''}`
+                                )
+                            }}
+                        ></p>
 
 
 
-                        <InfoSection title="DIET" content={recipeTestDummy.diet?.toString() || "Could not load data"} />
-                        <InfoSection title="INGREDIENTS" content={recipeTestDummy.ingredients?.toString() || "Could not load data"} />
+                        <InfoSection title="DIET" content={recipe.diet?.toString() || "Could not load data"} />
+                        <InfoSection title="INGREDIENTS" content={recipe.ingredients?.toString() || "Could not load data"} />
                     </section>
                 </main>
             ) : (

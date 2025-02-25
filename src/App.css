@@ -88,6 +88,13 @@ p {
     font-size: var(--text-font-size);
 }
 
+span {
+    color: var(--color-secondary);
+    font-style: italic;
+    font-weight: bold;
+
+}
+
 #scanner-page section {
     position: relative;
     background-color: var(--color-border);
