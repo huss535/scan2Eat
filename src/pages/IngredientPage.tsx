@@ -1,13 +1,19 @@
 import { Ingredient } from '../../functions/src/model';
 import InfoSection from '../components/InfoSection';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const IngredientPage = () => {
 
+    const [ingredient, setIngredient] = useState<Ingredient | null>(null);
+    const { ingredientId } = useParams();
+    useEffect(() => {
+        console.log(ingredientId)
+    }, [ingredientId]);
     return (
-
-        <main  >
+        (ingredient ? (<main  >
             <section className='header-background header-background-seperator'>
-                <h1>paprika</h1>
+                <h1>{ingredient.name}</h1>
             </section>
 
             <section className='page-content'>
@@ -21,7 +27,8 @@ const IngredientPage = () => {
 
             <button>View Recipes</button>
 
-        </main>
+        </main>) : (<></>))
+
     );
 }
 

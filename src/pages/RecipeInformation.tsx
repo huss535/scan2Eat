@@ -30,24 +30,24 @@ const RecipeInformation = () => {
             {recipe ? ( // Conditionally render based on whether recipe exists
                 <main>
                     {/*  <section className='header-background header-background-seperator'>
-                        <h1>{recipe.name}</h1>
+                        <h1>{recipeTestDummy.name}</h1>
                     </section> */}
                     <img src={recipe.image} alt={recipe.name} />
                     <section className='page-content'>
 
-
+                        <InfoSection title="DIET" content={recipe.diet?.toString() || "Could not load data"} />
+                        <InfoSection title="INGREDIENTS" content={recipe.ingredients?.toString() || "Could not load data"} />
                         <p
                             dangerouslySetInnerHTML={{
                                 __html: DOMPurify.sanitize(
-                                    `<span>${recipe.name}</span> ${recipe.summary || ''}`
+                                    `<span style="color: var(--color-secondary); fofont-weight: bold;">${recipe.name}</span> ${recipe.summary || ''}`
                                 )
                             }}
                         ></p>
 
 
 
-                        <InfoSection title="DIET" content={recipe.diet?.toString() || "Could not load data"} />
-                        <InfoSection title="INGREDIENTS" content={recipe.ingredients?.toString() || "Could not load data"} />
+
                     </section>
                 </main>
             ) : (
