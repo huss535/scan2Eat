@@ -40,7 +40,7 @@ const RecipeInformation = () => {
                         <p
                             dangerouslySetInnerHTML={{
                                 __html: DOMPurify.sanitize(
-                                    `<span style="color: var(--color-secondary); fofont-weight: bold;">${recipe.name}</span> ${recipe.summary || ''}`
+                                    `<span style="color: var(--color-secondary); font-weight: bold;">${recipe.name}</span> ${recipe.summary || ''}`
                                 )
                             }}
                         ></p>
