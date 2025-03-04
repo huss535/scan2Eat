@@ -1,7 +1,7 @@
 import { Ingredient } from '../../functions/src/model';
 import InfoSection from '../components/InfoSection';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // Generate description based on ingredient data
 const generateDescription = (description: {
@@ -38,11 +38,12 @@ const IngredientPage = () => {
 
     const [ingredient, setIngredient] = useState<Ingredient | null>(null);
     const { ingredientId } = useParams();
-
     const [neutrionalValue, setNutritionalValue] = useState<string>("");
     const [productDescription, setProductDescription] = useState<string>("");
-
     const [allergenString, setAllergenString] = useState<string>("");
+    const navigate = useNavigate();
+    let searchTerms = "";
+
     useEffect(() => {
         console.log(ingredientId);
         fetch(`http://127.0.0.1:5001/scan2eat-8058d/us-central1/getIngredient?barCode=${ingredientId}`).then(
@@ -51,13 +52,17 @@ const IngredientPage = () => {
             );
     }, [ingredientId]);
 
+
+
     useEffect(() => {
+
+        searchTerms = ingredient?.name?.replace(/ /g, ",") || "";
         //setting the neutritional value
         if (ingredient?.nutritionalGrade) {
             setNutritionalValue(ingredient.nutritionalGrade.toUpperCase());
         }
 
-        //settign the ingredient description
+        //setting the ingredient description
         const description = generateDescription(ingredient?.description || { fat: "0g", salt: "0g", sugars: "0g", saturatedFat: "0g" });
         setProductDescription(description);
 
@@ -69,6 +74,12 @@ const IngredientPage = () => {
         }
 
     }, [ingredient]);
+
+    const buttonHandler = () => {
+        console.log("Button Clicked");
+
+        navigate("/recipes", { state: { searchTerms: searchTerms } });
+    }
     return (
         (ingredient ? (<main  >
             <section className='header-background header-background-seperator'>
@@ -84,7 +95,7 @@ const IngredientPage = () => {
                 <p>{productDescription}</p>
             </section>
 
-            <button>View Recipes</button>
+            <button onClick={buttonHandler}>View Recipes</button>
 
         </main>) : (<></>))
 
