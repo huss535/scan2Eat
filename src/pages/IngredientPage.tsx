@@ -10,10 +10,29 @@ const generateDescription = (description: {
     sugars: string,
     saturatedFat: string,
 }) => {
+    const neutralSection: string[] = [];
+    if (description.fat) {
+        neutralSection.push(`${description.fat} in fat`);
 
-    const descriptionString = `This product is ${description.fat} in fat, ${description.saturatedFat} in saturated fat, ${description.sugars} in sugars, ${description.salt} in salt`;
+    }
+
+    if (description.salt) {
+
+        neutralSection.push(`${description.salt} in salt`);
+    }
+
+    if (description.sugars) {
+        neutralSection.push(`${description.sugars} in sugars`);
+    }
+    if (description.saturatedFat) {
+
+        neutralSection.push(`${description.saturatedFat} in saturated fat`);
+    }
+
+    const descriptionString = `This product is ${neutralSection.join(", ")}`;
     return descriptionString;
 }
+
 
 const IngredientPage = () => {
 
@@ -23,6 +42,7 @@ const IngredientPage = () => {
     const [neutrionalValue, setNutritionalValue] = useState<string>("");
     const [productDescription, setProductDescription] = useState<string>("");
 
+    const [allergenString, setAllergenString] = useState<string>("");
     useEffect(() => {
         console.log(ingredientId);
         fetch(`http://127.0.0.1:5001/scan2eat-8058d/us-central1/getIngredient?barCode=${ingredientId}`).then(
@@ -32,12 +52,21 @@ const IngredientPage = () => {
     }, [ingredientId]);
 
     useEffect(() => {
+        //setting the neutritional value
         if (ingredient?.nutritionalGrade) {
-            setNutritionalValue(ingredient.nutritionalGrade);
+            setNutritionalValue(ingredient.nutritionalGrade.toUpperCase());
         }
 
+        //settign the ingredient description
         const description = generateDescription(ingredient?.description || { fat: "0g", salt: "0g", sugars: "0g", saturatedFat: "0g" });
         setProductDescription(description);
+
+        // setting the allergen string
+        if (ingredient?.allergens && ingredient?.allergens.length > 0) {
+            setAllergenString(ingredient.allergens.join(", "));
+        } else {
+            setAllergenString("No allergens found");
+        }
 
     }, [ingredient]);
     return (
@@ -50,7 +79,7 @@ const IngredientPage = () => {
 
                 <InfoSection title="Nutritional Value" content={neutrionalValue} />
 
-                <InfoSection title="Allergens" content="NUTS, SOYBEANS" />
+                <InfoSection title="Allergens" content={allergenString} />
 
                 <p>{productDescription}</p>
             </section>
