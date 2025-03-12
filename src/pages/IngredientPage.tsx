@@ -42,7 +42,8 @@ const IngredientPage = () => {
     const [productDescription, setProductDescription] = useState<string>("");
     const [allergenString, setAllergenString] = useState<string>("");
     const navigate = useNavigate();
-    let searchTerms = "";
+    const [searchTerms, setSearchTerms] = useState("");
+
 
     useEffect(() => {
         console.log(ingredientId);
@@ -54,26 +55,33 @@ const IngredientPage = () => {
 
 
 
+
     useEffect(() => {
+        if (ingredient) {
+            // const formattedSearchTerms = ingredient.name?.replace(/ /g, ",") || "";
+            setSearchTerms(ingredient.name); // Store it in state
 
-        searchTerms = ingredient?.name?.replace(/ /g, ",") || "";
-        //setting the neutritional value
-        if (ingredient?.nutritionalGrade) {
-            setNutritionalValue(ingredient.nutritionalGrade.toUpperCase());
+            // Setting nutritional value
+            if (ingredient.nutritionalGrade) {
+                setNutritionalValue(ingredient.nutritionalGrade.toUpperCase());
+            }
+
+            // Setting ingredient description
+            const description = generateDescription(ingredient.description || {
+                fat: "0g", salt: "0g", sugars: "0g", saturatedFat: "0g"
+            });
+            setProductDescription(description);
+
+            // Setting the allergen string
+            if (ingredient.allergens && ingredient.allergens.length > 0) {
+                setAllergenString(ingredient.allergens.join(", "));
+            } else {
+                setAllergenString("No allergens found");
+            }
         }
-
-        //setting the ingredient description
-        const description = generateDescription(ingredient?.description || { fat: "0g", salt: "0g", sugars: "0g", saturatedFat: "0g" });
-        setProductDescription(description);
-
-        // setting the allergen string
-        if (ingredient?.allergens && ingredient?.allergens.length > 0) {
-            setAllergenString(ingredient.allergens.join(", "));
-        } else {
-            setAllergenString("No allergens found");
-        }
-
     }, [ingredient]);
+
+
 
     const buttonHandler = () => {
         console.log("Button Clicked");
