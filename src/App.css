@@ -72,11 +72,11 @@ p {
 
 h1 {
     font-size: var(--h1-font-size);
-    color: var(--color-secondary);
-    font-style: italic;
+    color: var(--color-background);
     text-align: center;
-    transform: rotate(-10deg);
-    margin: 1.5rem 0rem;
+    padding: 0rem 1rem;
+
+
 
 }
 
@@ -221,11 +221,18 @@ button {
     padding: 0.5rem 1.25rem;
     font-size: var(--text-font-size);
     color: black;
+
     border-radius: 1.5rem;
     margin-bottom: 1rem;
     background-color: var(--color-secondary);
     border: solid 2px var(--color-secondary);
     box-shadow: 4.0px 2.0px 8.0px hsl(0deg 0% 0% / 0.38);
+}
+
+button span {
+    font-size: var(--text-font-size);
+    color: var(--color-background);
+
 }
 
 img {

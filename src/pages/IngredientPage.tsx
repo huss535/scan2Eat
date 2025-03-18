@@ -103,7 +103,7 @@ const IngredientPage = () => {
                 <p>{productDescription}</p>
             </section>
 
-            <button onClick={buttonHandler}>View Recipes</button>
+            <button onClick={buttonHandler}><span>View Recipes</span></button>
 
         </main>) : (<></>))
 
