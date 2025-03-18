@@ -11,6 +11,7 @@ const generateDescription = (description: {
     saturatedFat: string,
 }) => {
     const neutralSection: string[] = [];
+
     if (description.fat) {
         neutralSection.push(`${description.fat} in fat`);
 
@@ -29,6 +30,9 @@ const generateDescription = (description: {
         neutralSection.push(`${description.saturatedFat} in saturated fat`);
     }
 
+    if (neutralSection.length === 0) {
+        return "No nutritional information found";
+    }
     const descriptionString = `This product is ${neutralSection.join(", ")}`;
     return descriptionString;
 }
