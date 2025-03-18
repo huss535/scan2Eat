@@ -27,7 +27,7 @@ const BarcodeScanner = ({ onScanSuccess, onScanError }: BarcodeScannerProps) => 
         qrCodeScanner.render(onScanSuccess, onScanError);
 
         return () => {
-            /*  qrCodeScanner.clear(); */
+            qrCodeScanner.clear();
         };
     });
 

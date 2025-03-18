@@ -4,7 +4,12 @@ export interface Ingredient {
     name: string;
     nutritionalGrade?: string;
     allergens?: string[];
-    description?: {};
+    description?: {
+        fat: string,
+        salt: string,
+        sugars: string,
+        saturatedFat: string,
+    };
 }
 
 export interface Recipe {
