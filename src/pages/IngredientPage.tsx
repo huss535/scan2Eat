@@ -78,6 +78,18 @@ const IngredientPage = () => {
 
             // Setting the allergen string
             if (ingredient.allergens && ingredient.allergens.length > 0) {
+
+                for (let i = 0; i < ingredient.allergens.length; i++) {
+
+                    const colonIndex = ingredient.allergens[i].indexOf(":");
+                    if (colonIndex !== -1) {
+                        ingredient.allergens[i] = ingredient.allergens[i].substring(colonIndex + 1);
+                    }
+
+
+                }
+
+
                 setAllergenString(ingredient.allergens.join(", "));
             } else {
                 setAllergenString("No allergens found");
