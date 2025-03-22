@@ -15,17 +15,36 @@ export const helloWorld = onRequest((request, response) => {
 
 // Endpoint to get scanned ingredient information
 export const getIngredient = onRequest(async (request, response) => {
-    const barCode = request.query.barCode as string;
-    const fetchResponse = await fetch(`https://world.openfoodfacts.org/api/v0/product/${barCode}.json`);
-    const data = await fetchResponse.json();
-    const ingredient: Ingredient = {
-        name: data.product.product_name,
-        allergens: data.product.allergens_tags,
-        nutritionalGrade: data.product.nutrition_grade_fr,
-        description: data.product.nutrient_levels,
+    try {
+        const barCode = request.query.barCode as string;
+        if (!barCode) {
+            response.status(400).send({ error: "Barcode is required." });
+            return; // Ensure function ends
+        }
+
+        const fetchResponse = await fetch(`https://world.openfoodfacts.org/api/v0/product/${barCode}.json`);
+        const data = await fetchResponse.json();
+
+        // Check if the product exists
+        if (!data || data.status === 0 || !data.product) {
+            response.status(404).send({ error: "Product not found." });
+            return;
+        }
+
+        const ingredient: Ingredient = {
+            name: data.product.product_name || "Unknown",
+            allergens: data.product.allergens_tags || [],
+            nutritionalGrade: data.product.nutrition_grade_fr || "N/A",
+            description: data.product.nutrient_levels || {},
+        };
+
+        response.send(ingredient);
+    } catch (error) {
+        console.error("Error fetching product data:", error);
+        response.status(500).send({ error: "Internal server error." });
     }
-    response.send(ingredient);
 });
+
 
 // Endpoint to get recipes based on retrieved ingredient
 export const getRecipes = onRequest(async (request, response) => {

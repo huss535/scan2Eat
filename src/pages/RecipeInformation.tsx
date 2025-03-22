@@ -51,7 +51,9 @@ const RecipeInformation = () => {
                     </section>
                 </main>
             ) : (
-                <p>Loading...</p> // Show loading message if recipe is not yet available
+                <main style={{ textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                    <p>Loading...</p>
+                </main>
             )}
         </>
     )

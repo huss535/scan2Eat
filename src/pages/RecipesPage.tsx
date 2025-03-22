@@ -23,11 +23,17 @@ const RecipesPage = () => {
             <section className='header-background header-background-seperator'>
                 <h1>Recipes</h1>
             </section>
-            <div className="recipes-container">
-                {recipesArray.map((recipe, index) => (
-                    <RecipeContainer key={index} recipe={recipe} />
-                ))}
-            </div>
+
+
+            {recipesArray.length > 0
+                ? <div className="recipes-container">
+                    {recipesArray.map((recipe, index) => (
+                        <RecipeContainer key={index} recipe={recipe} />
+                    ))}
+                </div>
+                : <div ><span>Could Not Find Recipes</span></div>
+            }
+
 
         </main>
 
