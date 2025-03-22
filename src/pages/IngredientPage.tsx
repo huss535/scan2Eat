@@ -78,6 +78,18 @@ const IngredientPage = () => {
 
             // Setting the allergen string
             if (ingredient.allergens && ingredient.allergens.length > 0) {
+
+                for (let i = 0; i < ingredient.allergens.length; i++) {
+
+                    const colonIndex = ingredient.allergens[i].indexOf(":");
+                    if (colonIndex !== -1) {
+                        ingredient.allergens[i] = ingredient.allergens[i].substring(colonIndex + 1);
+                    }
+
+
+                }
+
+
                 setAllergenString(ingredient.allergens.join(", "));
             } else {
                 setAllergenString("No allergens found");
@@ -93,23 +105,42 @@ const IngredientPage = () => {
         navigate("/recipes", { state: { searchTerms: searchTerms } });
     }
     return (
-        (ingredient ? (<main  >
-            <section className='header-background header-background-seperator'>
-                <h1>{ingredient.name}</h1>
-            </section>
+        (ingredient ? (
 
-            <section className='page-content'>
+            (ingredient.name ? (<main  >
+                <section className='header-background header-background-seperator'>
+                    <h1>{ingredient.name}</h1>
+                </section>
 
-                <InfoSection title="Nutritional Value" content={neutrionalValue} />
+                <section className='page-content'>
 
-                <InfoSection title="Allergens" content={allergenString} />
+                    <InfoSection title="Nutritional Value" content={neutrionalValue} />
 
-                <p>{productDescription}</p>
-            </section>
+                    <InfoSection title="Allergens" content={allergenString} />
 
-            <button onClick={buttonHandler}><span>View Recipes</span></button>
+                    <p>{productDescription}</p>
+                </section>
 
-        </main>) : (<></>))
+                <button onClick={buttonHandler}><span>View Recipes</span></button>
+
+            </main>) : (
+                <main style={{ textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                    <h1>Product not found</h1>
+                </main>)
+
+            )
+
+
+
+
+        ) : (
+
+            <main style={{ textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <p>Loading.....</p>
+            </main>
+
+
+        ))
 
     );
 }
